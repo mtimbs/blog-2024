@@ -1,6 +1,6 @@
 <div class="container">
 <div class="marquee">
-<pre class="header-ascii large">
+<pre class="header-ascii">
 
 
                                                                                                                                                                                                                                                                                                                ▓▓█▒▒▓▓
@@ -231,8 +231,6 @@ pre {
 }
 .container {
     overflow: hidden;
-    height: 100%;
-
 }
 
 .marquee{
@@ -251,5 +249,13 @@ pre {
 @keyframes scroll{
     0% {left: -300px;}
     100% {left:800px;}
+}
+
+@media (max-width: 430px){
+    .container,
+    .marquee,
+    .header-ascii {
+        height: 100%;
+    }
 }
 </style>

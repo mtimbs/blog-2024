@@ -7,7 +7,7 @@
 
 :root {
   --font-family: "JetBrains Mono", monospace;
-  --line-height: 1rem;
+  --line-height: 1.2rem;
   --border-thickness: 2px;
   --text-color: #000;
   --text-color-alt: #666;
@@ -129,7 +129,7 @@ a:hover {
 
 p {
   margin-bottom: var(--line-height);
-  line-height: calc(2 * var(--line-height));
+  line-height: calc(1.5 * var(--line-height));
 }
 
 strong {
