@@ -123,6 +123,10 @@ a:visited {
   color: var(--text-color);
 }
 
+a:hover {
+  color: var(--text-color-alt);
+}
+
 p {
   margin-bottom: var(--line-height);
 }
@@ -507,7 +511,7 @@ code {
   background-color: rgb(var(--gray-light));
 }
 pre {
-  padding: 1em;
+  padding: calc(var(--line-height)) 3ch;
 }
 pre > code {
   all: unset;

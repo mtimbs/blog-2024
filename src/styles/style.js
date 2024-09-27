@@ -45,7 +45,7 @@ function adjustMediaPadding() {
     }
   }
 
-  const medias = document.querySelectorAll("img, video");
+  const medias = document.querySelectorAll("img, video", "pre", "code");
   for (media of medias) {
     switch (media.tagName) {
       case "IMG":
