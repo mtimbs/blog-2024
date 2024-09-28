@@ -1,6 +1,7 @@
 <div class="container">
-<div class="marquee">
-<pre class="header-ascii">
+  <div class="marquee">
+    <pre
+      class="header-ascii">
 
 
                                                                                                                                                                                                                                                                                                                ▓▓█▒▒▓▓
@@ -222,38 +223,43 @@
 
 
 			</pre>
-			</div>
+  </div>
 </div>
 <container>
-<style>
-pre {
-    overflow: unset;
-}
-.container {
-    overflow: hidden;
-}
-
-.marquee{
-    display:block;
-    position:relative;
-    animation:scroll 7s linear infinite;
-}
-
-.header-ascii {
-    color: var(--text-color-alt);
-    font-size: 0.1em;
-    line-height: 0.7em;
-}
-
-/* Make it move */
-@keyframes scroll{
-    0% {left: -300px;}
-    100% {left:800px;}
-}
-
-@media (max-width: 430px){
-    .container {
-        display: none;
+  <style>
+    pre {
+      overflow: unset;
     }
-}
-</style>
+    .container {
+      overflow: hidden;
+    }
+
+    .marquee {
+      display: block;
+      position: relative;
+      animation: scroll 7s linear infinite;
+    }
+
+    .header-ascii {
+      color: var(--text-color-alt);
+      font-size: 0.1em;
+      line-height: 0.7em;
+    }
+
+    /* Make it move */
+    @keyframes scroll {
+      0% {
+        left: -300px;
+      }
+      100% {
+        left: 800px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .container {
+        display: none;
+      }
+    }
+  </style>
+</container>

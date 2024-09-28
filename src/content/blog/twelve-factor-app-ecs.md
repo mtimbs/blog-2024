@@ -4,6 +4,7 @@
     pubDate: "2021-08-21"
     status: "published"
 ---
+
 Every developer should be familiar with the concepts outlined in [The Twelve-Factor App](https://12factor.net/). The twelve-factor app is a
 methodology for building modern SaaS apps.
 
@@ -15,6 +16,7 @@ service like ECS, we are able to easily build twelve-factor applications.
 Let's address the main factors of a twelve-factor app that are relevant to ECS and CDK below.
 
 ### [III. Config](https://12factor.net/config)
+
 > The twelve-factor app stores config in environment variables (often shortened to env vars or env). Env vars are
 > easy to change between deploys without changing any code; unlike config files, there is little chance of them
 > being checked into the code repo accidentally; and unlike custom config files, or other config mechanisms such as
@@ -26,35 +28,39 @@ container definition lets us define the Docker image for our container, along wi
 secrets to inject into that container. An example container definition using the CDK looks something like this
 
 ```javascript
-const applicationContainer = applicationServiceDefinition.addContainer('app-container', {
-  cpu: 256,
-  environment: {
-    APP_URL: 'https://example.com',
-    LOG_CHANNEL: 'stdout',
-    LOG_LEVEL: 'debug',
-    DB_CONNECTION: 'mysql',
-    DB_HOST: db.dbInstanceEndpointAddress,
-    DB_PORT: db.dbInstanceEndpointPort,
-    CACHE_DRIVER: 'redis',
-    REDIS_HOST: redis.attrRedisEndpointAddress,
-    REDIS_PASSWORD: 'null',
-    REDIS_PORT: '6379',
+const applicationContainer = applicationServiceDefinition.addContainer(
+  "app-container",
+  {
+    cpu: 256,
+    environment: {
+      APP_URL: "https://example.com",
+      LOG_CHANNEL: "stdout",
+      LOG_LEVEL: "debug",
+      DB_CONNECTION: "mysql",
+      DB_HOST: db.dbInstanceEndpointAddress,
+      DB_PORT: db.dbInstanceEndpointPort,
+      CACHE_DRIVER: "redis",
+      REDIS_HOST: redis.attrRedisEndpointAddress,
+      REDIS_PASSWORD: "null",
+      REDIS_PORT: "6379",
+    },
+    image: ContainerImage.fromDockerImageAsset(applicationImage),
+    logging: LogDriver.awsLogs({
+      logGroup: applicationLogGroup,
+      streamPrefix: new Date().toLocaleDateString("en-ZA"),
+    }),
+    memoryLimitMiB: 512,
+    secrets: {
+      DB_DATABASE: Secret.fromSecretsManager(db.secret, "dbname"),
+      DB_USERNAME: Secret.fromSecretsManager(db.secret, "username"),
+      DB_PASSWORD: Secret.fromSecretsManager(db.secret, "password"),
+      STRIPE_KEY: Secret.fromSecretsManager(stripe, "STRIPE_KEY"),
+      STRIPE_SECRET: Secret.fromSecretsManager(stripe, "STRIPE_SECRET"),
+    },
   },
-  image: ContainerImage.fromDockerImageAsset(applicationImage),
-  logging: LogDriver.awsLogs({
-    logGroup: applicationLogGroup,
-    streamPrefix: new Date().toLocaleDateString('en-ZA')
-  }),
-  memoryLimitMiB: 512,
-  secrets: {
-    DB_DATABASE: Secret.fromSecretsManager(db.secret, 'dbname'),
-    DB_USERNAME: Secret.fromSecretsManager(db.secret, 'username'),
-    DB_PASSWORD: Secret.fromSecretsManager(db.secret, 'password'),
-    STRIPE_KEY: Secret.fromSecretsManager(stripe, 'STRIPE_KEY'),
-    STRIPE_SECRET: Secret.fromSecretsManager(stripe, 'STRIPE_SECRET'),
-  },
-});
+);
 ```
+
 In this example, we can see that some of our environment variables are set directly from other resources managed via
 the CDK (db is an RDS instance, and redis is an ElastiCache cluster). The other variables that are hardcoded as
 strings we can easily swap out to reference the
@@ -75,6 +81,7 @@ Note: Use Parameter Store for configuration (connection strings, log levels, etc
 information (passwords and secret keys)
 
 ### [IV. Backing Services](https://12factor.net/backing-services)
+
 > The code for a twelve-factor app makes no distinction between local and third party services. To the app, both are
 > attached resources, accessed via a URL or other locator/credentials stored in the config. A deploy of the
 > twelve-factor app should be able to swap out a local MySQL database with one managed by a third party (such as
@@ -89,13 +96,13 @@ our application to these services via a Container Definition.
 
 ```javascript
 // RDS
-const db = new DatabaseInstance(this, 'primary-db', {
+const db = new DatabaseInstance(this, "primary-db", {
   allocatedStorage: 20,
   autoMinorVersionUpgrade: true,
   allowMajorVersionUpgrade: false,
-  databaseName: 'example',
+  databaseName: "example",
   engine: DatabaseInstanceEngine.mysql({
-    version: MysqlEngineVersion.VER_8_0_21
+    version: MysqlEngineVersion.VER_8_0_21,
   }),
   iamAuthentication: true,
   instanceType: InstanceType.of(InstanceClass.BURSTABLE3, InstanceSize.SMALL),
@@ -104,32 +111,33 @@ const db = new DatabaseInstance(this, 'primary-db', {
   securityGroups: [databaseSecurityGroup],
   vpc,
   vpcSubnets: {
-    subnetGroupName: SUBNET_ISOLATED.name
-  }
+    subnetGroupName: SUBNET_ISOLATED.name,
+  },
 });
 
 // ELASTICACHE
-const redisSubnetGroup = new CfnSubnetGroup(this, 'redis-subnet-group', {
-    description: 'Redis Subnet Group',
-    subnetIds: vpc.isolatedSubnets.map(s => s.subnetId),
-    cacheSubnetGroupName: 'RedisSubnetGroup'
+const redisSubnetGroup = new CfnSubnetGroup(this, "redis-subnet-group", {
+  description: "Redis Subnet Group",
+  subnetIds: vpc.isolatedSubnets.map((s) => s.subnetId),
+  cacheSubnetGroupName: "RedisSubnetGroup",
 });
 
-const redis = new CfnCacheCluster(this, 'redis-cluster', {
-    cacheNodeType: 'cache.t3.small',
-    cacheSubnetGroupName: redisSubnetGroup.cacheSubnetGroupName,
-    clusterName: 'redis-cluster',
-    engine: 'redis',
-    engineVersion: '6.x',
-    numCacheNodes: 1,
-    port: 6379,
-    vpcSecurityGroupIds: [redisSecurityGroup.securityGroupId]
+const redis = new CfnCacheCluster(this, "redis-cluster", {
+  cacheNodeType: "cache.t3.small",
+  cacheSubnetGroupName: redisSubnetGroup.cacheSubnetGroupName,
+  clusterName: "redis-cluster",
+  engine: "redis",
+  engineVersion: "6.x",
+  numCacheNodes: 1,
+  port: 6379,
+  vpcSecurityGroupIds: [redisSecurityGroup.securityGroupId],
 });
 
 redis.node.addDependency(redisSubnetGroup);
 ```
 
 ### [V. Build, Release, Run](https://12factor.net/build-release-run)
+
 > The twelve-factor app uses strict separation between the build, release, and run stages. For example, it is
 > impossible to make changes to the code at runtime, since there is no way to propagate those changes back to the
 > build stage.
@@ -139,15 +147,18 @@ redis.node.addDependency(redisSubnetGroup);
 CDK lets us reference a Dockerfile that defines how our source code gets built into a Docker image.
 
 ```javascript
-const applicationImage = new DockerImageAsset(this, 'applicationImage', {
-  directory: '..',
-  file: './docker/apache/Dockerfile'
+const applicationImage = new DockerImageAsset(this, "applicationImage", {
+  directory: "..",
+  file: "./docker/apache/Dockerfile",
 });
 ```
+
 ### Release
+
 CDK then tags that image and uploads it to the Elastic Container Registry (ECR)
 
 ### Run
+
 In our Config example, we had the following line in our container definition
 
     image: ContainerImage.fromDockerImageAsset(applicationImage),
@@ -159,18 +170,23 @@ the event that a new release is broken, ECS can even automatically rollback to a
 setting the rollback attribute to true on our circuit breaker.
 
 ```javascript
-const applicationService = new FargateService(this, 'application-fargate-service', {
-  circuitBreaker: {
-    rollback: true
+const applicationService = new FargateService(
+  this,
+  "application-fargate-service",
+  {
+    circuitBreaker: {
+      rollback: true,
+    },
+    deploymentController: {
+      type: DeploymentControllerType.ECS,
+    },
+    taskDefinition: applicationServiceDefinition,
   },
-  deploymentController: {
-    type: DeploymentControllerType.ECS
-  },
-  taskDefinition: applicationServiceDefinition,
-});
+);
 ```
 
 ### [VI. Process](https://12factor.net/processes)
+
 > Twelve-factor processes are stateless and share-nothing. Any data that needs to persist must be stored in a
 > stateful backing service, typically a database.
 
@@ -184,24 +200,24 @@ Creating load-balanced applications with ECS and CDK is very straightforward.
 
 ```javascript
 // LOAD BALANCER
-const alb = new ApplicationLoadBalancer(this, 'application-ALB', {
+const alb = new ApplicationLoadBalancer(this, "application-ALB", {
   http2Enabled: false,
   internetFacing: true,
-  loadBalancerName: 'application',
+  loadBalancerName: "application",
   vpc,
   vpcSubnets: {
-    subnetGroupName: SUBNET_APPLICATION.name
-  }
+    subnetGroupName: SUBNET_APPLICATION.name,
+  },
 });
 
 // For HTTPS you need to set up an ACM and reference it here
-const listener = alb.addListener('alb-target-group', {
+const listener = alb.addListener("alb-target-group", {
   open: true,
-  port: 80
+  port: 80,
 });
 
 // Target group to make resources containers discoverable by the application load balancer
-const targetGroupHttp = new ApplicationTargetGroup(this, 'alb-target-group', {
+const targetGroupHttp = new ApplicationTargetGroup(this, "alb-target-group", {
   port: 80,
   protocol: ApplicationProtocol.HTTP,
   targetType: TargetType.IP,
@@ -210,12 +226,12 @@ const targetGroupHttp = new ApplicationTargetGroup(this, 'alb-target-group', {
 
 // Health check for containers to check they were deployed correctly
 targetGroupHttp.configureHealthCheck({
-  path: '/api/health-check',
+  path: "/api/health-check",
   protocol: Protocol.HTTP,
 });
 
 // Add target group to listener
-listener.addTargetGroups('alb-listener-target-group', {
+listener.addTargetGroups("alb-listener-target-group", {
   targetGroups: [targetGroupHttp],
 });
 
@@ -226,16 +242,17 @@ const scaleTarget = applicationService.autoScaleTaskCount({
   maxCapacity: 10,
 });
 
-scaleTarget.scaleOnMemoryUtilization('scale-out-memory-threshold', {
-  targetUtilizationPercent: 75
+scaleTarget.scaleOnMemoryUtilization("scale-out-memory-threshold", {
+  targetUtilizationPercent: 75,
 });
 
-scaleTarget.scaleOnCpuUtilization('scale-out-cpu-threshold', {
-  targetUtilizationPercent: 75
+scaleTarget.scaleOnCpuUtilization("scale-out-cpu-threshold", {
+  targetUtilizationPercent: 75,
 });
 ```
 
 ### [VIII. Concurrency](https://12factor.net/concurrency)
+
 > In the twelve-factor app, processes are a first class citizen. Processes in the twelve-factor app take strong cues
 > from the unix process model for running service daemons. Using this model, the developer can architect their app
 > to handle diverse workloads by assigning each type of work to a process type. For example, HTTP requests may be
@@ -247,28 +264,30 @@ separate containers.
 
 For example, Laravel has built-in functionality to process queued jobs, or to schedule recurring tasks. In a
 traditional single-server deployment, we would simply deploy our app and start three processes on our server
+
 - apache for handling HTTP requests
 - cron for running scheduled tasks
 - process for monitoring our queues
 
 With ECS we need to define a specific container for each task and run a single process in each container.
 
-````javascript
-const applicationImage = new DockerImageAsset(this, 'applicationImage', {
-  directory: '..',
-  file: './docker/apache/Dockerfile'
+```javascript
+const applicationImage = new DockerImageAsset(this, "applicationImage", {
+  directory: "..",
+  file: "./docker/apache/Dockerfile",
 });
 
-const schedulerImage = new DockerImageAsset(this, 'schedulerImage', {
-  directory: '..',
-  file: './docker/scheduler/Dockerfile'
+const schedulerImage = new DockerImageAsset(this, "schedulerImage", {
+  directory: "..",
+  file: "./docker/scheduler/Dockerfile",
 });
 
-const queueWorkerImage = new DockerImageAsset(this, 'queueWorkerImage', {
-  directory: '..',
-  file: './docker/queue_worker/Dockerfile'
+const queueWorkerImage = new DockerImageAsset(this, "queueWorkerImage", {
+  directory: "..",
+  file: "./docker/queue_worker/Dockerfile",
 });
-````
+```
+
 In each container, we could reference a start script
 
     CMD ["/start.sh"]
@@ -276,7 +295,7 @@ In each container, we could reference a start script
 For a Laravel application, our start script might look like this - we do some pre-caching of config, seed our
 database and then run apache in the foreground
 
-````bash
+```bash
 #!/bin/bash
 echo "AWS_CONTAINER_CREDENTIALS_RELATIVE_URI=$AWS_CONTAINER_CREDENTIALS_RELATIVE_URI" > /var/www/html/.env
 php artisan cache:clear
@@ -285,19 +304,19 @@ php artisan route:cache
 php artisan migrate --seed --force
 
 /usr/local/bin/apache2-foreground
-````
+```
 
 We'd then run our queue process in another container. Again we need some laravel specific config caching and then
 run the 'php artisan queue:work' command
 
-````bash
+```bash
 #!/bin/bash
 echo "AWS_CONTAINER_CREDENTIALS_RELATIVE_URI=$AWS_CONTAINER_CREDENTIALS_RELATIVE_URI" > /var/www/html/.env
 php artisan cache:clear
 php artisan config:cache
 
 php artisan queue:work --timeout=300
-````
+```
 
 Finally, for scheduled jobs
 
@@ -327,11 +346,12 @@ cron -f
 ```
 
 ### [X. Dev/prod parity](https://12factor.net/dev-prod-parity)
+
 > The twelve-factor developer resists the urge to use different backing services between development and production,
 > even when adapters theoretically abstract away any differences in backing services. Differences between backing
 > services mean that tiny incompatibilities crop up, causing code that worked and passed tests in development or
 > staging to fail in production. These types of errors create friction that disincentivizes continuous deployment.
-> The cos  of this friction and the subsequent dampening of continuous deployment is extremely high when considered
+> The cos of this friction and the subsequent dampening of continuous deployment is extremely high when considered
 > in aggregate over the lifetime of an application.
 
 By using the AWS CDK, and defining all our infrastructure in code, we enforce strict parity between development,
@@ -340,6 +360,7 @@ thing that changes is the AWS account it gets deployed to. This ensures we don't
 code to production - and we should be shipping continuously!
 
 ### [XI. Logs](https://12factor.net/logs)
+
 > A twelve-factor app never concerns itself with routing or storage of its output stream. It should not attempt to
 > write to or manage logfiles. Instead, each running process writes its event stream, unbuffered, to stdout. During
 > local development, the developer will view this stream in the foreground of their terminal to observe the app’s
@@ -349,23 +370,27 @@ Our containers are constantly being spun up and torn down. We also can't SSH int
 previous example, I showed an example Container Definition for an ECS Fargate Service. It defined a log driver like so:
 
 ```javascript
-const applicationContainer = applicationServiceDefinition.addContainer('app-container', {
-  // other config
-  environment: {
-    // other env
-    LOG_LEVEL: 'stdout'
+const applicationContainer = applicationServiceDefinition.addContainer(
+  "app-container",
+  {
+    // other config
+    environment: {
+      // other env
+      LOG_LEVEL: "stdout",
+    },
+    logging: LogDriver.awsLogs({
+      logGroup: applicationLogGroup,
+      streamPrefix: new Date().toLocaleDateString("en-ZA"),
+    }),
   },
-  logging: LogDriver.awsLogs({
-    logGroup: applicationLogGroup,
-    streamPrefix: new Date().toLocaleDateString('en-ZA')
-  }),
-});
+);
 ```
 
 Each container logs to stdout and then ECS uses a built-in log driver to stream those logs to
 [AWS Cloudwatch](https://aws.amazon.com/cloudwatch/). That's all we need to do to meet the Log criteria.
 
 ## Find Out More
+
 I have a full 80-minute course on ECS using CDK which you can find [here](https://michaeltimbs.gumroad.com/l/BZPcgS)
 
 ![Example Architecture](https://s3.ap-southeast-2.amazonaws.com/images.michaeltimbs.me/Architecture.png)

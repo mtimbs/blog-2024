@@ -1,46 +1,45 @@
 ---
-import HeaderLink from './HeaderLink.astro';
-import { SITE_TITLE } from '../consts';
+import HeaderLink from "./HeaderLink.astro";
+import { SITE_TITLE } from "../consts";
 ---
 
 <header>
-    <table class="header">
+  <table class="header">
     <thead>
-        <tr>
-            <td colspan="4" rowspan="2" class="width-auto">
-                <h1 class="title">
-                <a href="/">{SITE_TITLE}</a></h1>
-                <span class="subtitle">Que sais-je?</span>
-            </td>
-        </tr>
-        <tr>
-        </thead>
-        <tbody>
-            <th>
-                <HeaderLink href="/">Home</HeaderLink>
-            </th>
-            <th>
-                <HeaderLink href="/blog">Blog</HeaderLink>
-            </th>
-            <th>
-                <HeaderLink href="/about">About</HeaderLink>
-            </th>
-        </tr>
-        <tbody>
-    </table>
+      <tr>
+        <td colspan="4" rowspan="2" class="width-auto">
+          <h1 class="title">
+            <a href="/">{SITE_TITLE}</a>
+          </h1>
+          <span class="subtitle">Que sais-je?</span>
+        </td>
+      </tr>
+      <tr> </tr>
+      <tbody>
+        <th>
+          <HeaderLink href="/">Home</HeaderLink>
+        </th>
+        <th>
+          <HeaderLink href="/blog">Blog</HeaderLink>
+        </th>
+        <th>
+          <HeaderLink href="/about">About</HeaderLink>
+        </th>
+      </tbody>
+      <tbody> </tbody>
+    </thead>
+    <style>
+      .header {
+        margin-bottom: calc(var(--line-height) * 2);
+      }
+
+      .header h1 {
+        margin: 0;
+      }
+
+      .header a {
+        text-decoration: none;
+      }
+    </style>
+  </table>
 </header>
-<style>
-.header {
-  margin-bottom: calc(var(--line-height) * 2);
-}
-
-.header h1 {
-  margin: 0;
-}
-
-.header a {
-    text-decoration: none;
-}
-
-
-</style>

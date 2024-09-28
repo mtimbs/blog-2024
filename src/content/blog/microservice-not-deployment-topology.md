@@ -13,24 +13,25 @@ I would like for us to get out of the habit of talking about the deployment topo
 I would like for us to get out of the habit of talking about the deployment topology of our code as "services". To explain why, I will progressively change an app's deployment topology and ask at what point it becomes a "microservice". Our base case is going to be a single monolithic application deployed on a single VM.
 
 ### Scaling out behind a load balancer
+
 ![Scaling behind a load balancer](https://s3.ap-southeast-2.amazonaws.com/images.michaeltimbs.me/ms-2.svg)
 
 The first change to our deployment topology has allowed us to scale. We've taken a single deployment artefact, and deployed it multiple times. A load balancer in front allows us to distribute incoming traffic across the apps in order to let them all contribute to serving base load traffic.
 
 **Verdict: Not Microservices**
 
-
 ### Allow some asynchronous processing
+
 ![llow some asynchronous processing](https://s3.ap-southeast-2.amazonaws.com/images.michaeltimbs.me/ms-3.svg)
 
 While keeping a single deployment artefact (e.g. Docker image) we have deployed a new instance. This time not behind the load balancer. This artefact is not going to serve web traffic. Instead, it is going to process messages off a queue asynchronously.
 
-Previously this work could have been done on the web servers themselves. The queue could have already existed - it's irrelevant to the point being made. Here we've just taken the same bit of code (our monolithic application artefact) - with two different entry-points - and isolated one of the instances from incoming web traffic.  This allows us to scale our web server independently from the code we process asynchronously.
+Previously this work could have been done on the web servers themselves. The queue could have already existed - it's irrelevant to the point being made. Here we've just taken the same bit of code (our monolithic application artefact) - with two different entry-points - and isolated one of the instances from incoming web traffic. This allows us to scale our web server independently from the code we process asynchronously.
 
 **Verdict: Not Microservices**
 
-
 ### Use a bundler/tree-shaker to remove unused code
+
 ![Use a bundler/tree-shaker to remove unused code](https://s3.ap-southeast-2.amazonaws.com/images.michaeltimbs.me/ms-4.svg)
 
 The only change we have made in this next step is that instead of using a single build image for the two different use cases, we're using some form of build tooling/bundler to strip out dead code for each of the two entry points. Webpack or Esbuild are examples of this in the JavaScript ecosystem.
@@ -39,8 +40,8 @@ We still build both these artefacts from a single code-base, however they are di
 
 **Verdict: Not Microservices**
 
-
 ### Move some more logic out
+
 ![Move some more logic out](https://s3.ap-southeast-2.amazonaws.com/images.michaeltimbs.me/ms-5.svg)
 
 Assuming we were doing some event driven work, We can pull that out to its own server so that our web servers can do nothing but serve web traffic (request/response lifecycle only). This has allowed us to scale in a more predictable way behind the load balancer.
@@ -49,8 +50,8 @@ Fundamentally this is the same thing we did with the queue processor. We now jus
 
 **Verdict: Not Microservices**
 
-
 ### Breaking up our web server
+
 ![Breaking up our web server](https://s3.ap-southeast-2.amazonaws.com/images.michaeltimbs.me/ms-6.svg)
 
 Here we've changed up our deployment topology again. We had some specific endpoints on our web server that were very resource hungry and/or slow. This was causing some issues with the load balancing strategies. In order to help scale, we've pulled it out to its own set of web servers (possibly behind its own load balancer). We can put an API Gateway in front of the load balancer or simply use a different domain to route traffic to the new web server. Some teams will even opt to move this to a serverless function.
@@ -63,8 +64,8 @@ An example of this kind of workload is PDF generation. Generating PDFs from HTML
 
 **Verdict: Not Microservices**
 
-
 ### Welcome to Serverless architecture
+
 ![Welcome to Serverless architecture](https://s3.ap-southeast-2.amazonaws.com/images.michaeltimbs.me/ms-7.svg)
 
 If you carry on this decomposition of your application for each possible entrypoint, you arrive at Serverless architecture. Not only is each route of our application now its own code artefact, we can create independent artefacts for a single http verb on a single route (e.g POST /foo, GET /foo, GET /foo/id, PATCH /foo/id etc can all be different lambdas). Even our queue/event processors can be split into multiple lambdas depending on the message type.
@@ -81,8 +82,8 @@ Nobody would seriously try to claim that this is micro-frontends. It's simply a 
 
 **Verdict: Not Microservices**
 
-
 ## The infamous Amazon Prime blog post
+
 ![Amazon Prime Blog Post Heading](https://s3.ap-southeast-2.amazonaws.com/images.michaeltimbs.me/amazonprimeheading.png)
 
 Earlier in 2023 Amazon Prime released a blog post claiming that they reduced their costs by 90% by abandoning microservices and going back to a monolith. A lot of anti-microservice people jumped on this, and it made a lot of noise on Twitter.
@@ -98,6 +99,5 @@ The fact that they have dedicated teams responsible for different parts of the d
 > The initial version of our service consisted of distributed components that were orchestrated by AWS Step Functions. The two most expensive operations in terms of cost were the orchestration workflow and when data passed between distributed components. To address this, we moved all components into a single process to keep the data transfer within the process memory, which also simplified the orchestration logic.
 
 They literally call it a service again here. All they really did was move from distributed architecture to a monolithic one - **within the (micro)service boundary!**
-
 
 Could you imagine taking a piece of code - any piece of code - and wherever you have a function/method call, throwing a network request in between? Even if this code was still deployed on a single VM, in a single build artefact, it would be complete insanity to do this! The added failure scenarios, load, performance cost would make it just about the most irresponsible thing you could do.

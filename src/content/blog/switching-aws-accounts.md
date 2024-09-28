@@ -4,6 +4,7 @@
     pubDate: "2020-03-04"
     status: "published"
 ---
+
 Whether you use AWS across your organisation or for personal projects, it is useful to set up multiple accounts on
 AWS to separate your staging/test and production environments.
 
@@ -15,7 +16,6 @@ The naive way of doing this involves constantly logging out and back in each tim
 setting up multiple chrome profiles that save your credentials for each account.
 
 A better way is to leverage assumed roles via IAM permissions and Organisation Units.
-
 
 ### AWS Organisations
 
@@ -38,15 +38,15 @@ we are going to create some new accounts
 ![AWS Console — Create Account View](https://cdn-images-1.medium.com/max/4148/1*-kgPDyVEvA7-hF-jN4kr0Q.png)
 
 The AWS account name I generally name after the organisational unit to keep things clear. The email I will usually
-do something like *michael+<environment>@domain.com.*
+do something like _michael+<environment>@domain.com._
 
-Leave the IAM role name as the default *OrganizationAccountAccessRole *(this is important).
+Leave the IAM role name as the default _OrganizationAccountAccessRole _(this is important).
 
 **Note:** AWS requires unique emails, so adding the “+pod” etc will satisfy that requirement while still delivering
 emails to your primary domain.
 
 Once you create these users, you’ll need to wait 1–5 minutes for an invitation email from AWS. You’ll then need to
-use the *forgot password* functionality to set a password for these accounts. I suggest using a password manager and
+use the _forgot password_ functionality to set a password for these accounts. I suggest using a password manager and
 making these strong.
 
 Log in to each of these accounts and note down the Account Number of each one. You’ll need these in a later step.
@@ -79,10 +79,10 @@ user. Once you log in you should see that the main account menu gives you access
 
 ![AWS Console- Switch Role](https://cdn-images-1.medium.com/max/5448/1*2PguwsfVzk9tbpfQlnBuYw.png)
 
-The *Switch Role* screen will prompt you to input the account number of the account you want to switch to. Add the
+The _Switch Role_ screen will prompt you to input the account number of the account you want to switch to. Add the
 account number of the Staging/Production account we created earlier.
 
-In the *Role* section, we need to input the role name we created with those accounts *OrganizationAccountAccessRole.*
+In the _Role_ section, we need to input the role name we created with those accounts _OrganizationAccountAccessRole._
 Then give the account display name and a colour and hit the Switch Role button.
 
 This will save this role on your account and redirect you to it. You can repeat this step with any other accounts

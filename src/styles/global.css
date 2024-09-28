@@ -129,7 +129,7 @@ a:hover {
 
 p {
   margin-bottom: var(--line-height);
-  line-height: calc(1 * var(--line-height));
+  line-height: calc(1.5 * var(--line-height));
 }
 
 strong {
@@ -472,7 +472,7 @@ label input {
 .debug .debug-grid {
   --color: color-mix(
     in srgb,
-    var(--text-color) 10%,
+    var(--text-color) 8%,
     var(--background-color) 90%
   );
   position: absolute;
@@ -513,7 +513,7 @@ code {
   font-style: italic;
 }
 pre {
-  padding: calc(var(--line-height)) 3ch;
+  padding: 1ch 1ch 1em 1ch;
   line-height: calc(1.5 * var(--line-height));
 }
 pre > code {

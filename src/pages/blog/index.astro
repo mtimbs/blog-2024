@@ -1,64 +1,63 @@
 ---
-import BaseHead from '../../components/BaseHead.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
-import FormattedDate from '../../components/FormattedDate.astro';
-import { posts } from "../../queries/posts"
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
+import FormattedDate from "../../components/FormattedDate.astro";
+import { posts } from "../../queries/posts";
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body class="debug">
-		<Header />
-		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.slug}/`}>
-									<h2 >{post.data.title}</h2>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
-		</main>
-		<Footer />
-	</body>
-	<style>
-		ul {
-			display: flex;
-			flex-direction: column;
-			gap: 2rem;
-			list-style-type: none;
-			margin: 0;
-			padding: 0 0.25em;
-		}
-		ul li * {
-			text-decoration: none;
-			transition: 0.2s ease;
-		}
-		ul li a {
-			display: block;
-		}
-		h2 {
-			margin: 0;
-		}
-		.date {
-			margin: 0;
-		}
-		ul li a:hover h2,
-		ul li a:hover .date {
-			color: var(--text-color-alt);
-		}
-	</style>
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body class="debug">
+    <Header />
+    <main>
+      <section>
+        <ul>
+          {
+            posts.map((post) => (
+              <li>
+                <a href={`/blog/${post.slug}/`}>
+                  <h2>{post.data.title}</h2>
+                  <p class="date">
+                    <FormattedDate date={post.data.pubDate} />
+                  </p>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </main>
+    <Footer />
+  </body><style>
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      list-style-type: none;
+      margin: 0;
+      padding: 0 0.25em;
+    }
+    ul li * {
+      text-decoration: none;
+      transition: 0.2s ease;
+    }
+    ul li a {
+      display: block;
+    }
+    h2 {
+      margin: 0;
+    }
+    .date {
+      margin: 0;
+    }
+    ul li a:hover h2,
+    ul li a:hover .date {
+      color: var(--text-color-alt);
+    }
+  </style>
 </html>
