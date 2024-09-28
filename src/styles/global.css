@@ -10,13 +10,19 @@
   --line-height: 1.2rem;
   --border-thickness: 2px;
   --text-color: #000;
-  --text-color-alt: #666;
+  --text-color-alt: #0092ca;
   --background-color: #fff;
   --background-color-alt: #eee;
 
   --font-weight-normal: 500;
   --font-weight-medium: 600;
   --font-weight-bold: 800;
+
+  --grid-color: color-mix(
+    in srgb,
+    var(--text-color-alt) 12%,
+    var(--background-color) 90%
+  );
 
   font-family: var(--font-family);
   font-optical-sizing: auto;
@@ -32,6 +38,11 @@
     --text-color-alt: #4af626;
     --background-color: #000;
     --background-color-alt: #111;
+    --grid-color: color-mix(
+      in srgb,
+      var(--text-color) 10%,
+      var(--background-color) 90%
+    );
   }
 }
 
@@ -58,8 +69,8 @@ body {
   position: relative;
   width: 100%;
   margin: 0;
-  padding: var(--line-height) 2ch;
-  max-width: calc(min(80ch, round(down, 100%, 1ch)));
+  padding: var(--line-height) 5ch;
+  max-width: calc(min(90ch, round(down, 100%, 1ch)));
   line-height: var(--line-height);
   overflow-x: hidden;
 }
@@ -69,7 +80,7 @@ body {
     font-size: 14px;
   }
   body {
-    padding: var(--line-height) 1ch;
+    padding: var(--line-height) 2ch;
   }
 }
 
@@ -129,7 +140,7 @@ a:hover {
 
 p {
   margin-bottom: var(--line-height);
-  line-height: calc(1.5 * var(--line-height));
+  line-height: calc(1.25 * var(--line-height));
 }
 
 strong {
@@ -470,11 +481,6 @@ label input {
 /* DEBUG UTILITIES */
 
 .debug .debug-grid {
-  --color: color-mix(
-    in srgb,
-    var(--text-color) 8%,
-    var(--background-color) 90%
-  );
   position: absolute;
   top: 0;
   left: 0;
@@ -482,10 +488,14 @@ label input {
   bottom: 0;
   z-index: -1;
   background-image: repeating-linear-gradient(
-      var(--color) 0 1px,
+      var(--grid-color) 0 1px,
       transparent 1px 100%
     ),
-    repeating-linear-gradient(90deg, var(--color) 0 1px, transparent 1px 100%);
+    repeating-linear-gradient(
+      90deg,
+      var(--grid-color) 0 1px,
+      transparent 1px 100%
+    );
   background-size: 1ch var(--line-height);
   margin: 0;
 }
