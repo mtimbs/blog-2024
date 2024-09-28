@@ -2,6 +2,7 @@
     title: "Removing explicit any from a TypeScript codebase"
     description: "There are a surprising number of ways to explicitly rely on the any 'type' in TypeScript. Enough that it makes a search and delete not as trivial as you would think."
     pubDate: "2024-03-12"
+    status: "published"
 ---
 Much has been [written](https://betterprogramming.pub/typescript-into-the-unknown-4c19d913cb15) about the `any` type (more of a type black hole than a type) and why the use of it is usually bad, yet many teams frequently adopt the use of `any` - especially when migrating a JavaScript codebase to TypeScript. At some point along that journey teams may want to remove the uses of `any` to more effectively leverage the safety that TypeScript provides. While they could just do a global search and replace and map `any` to `unknown` this usually isn't a viable strategy as this will cause an explosion of type errors in the code. Migrating from `any` to `unknown` will fail type checks even with strict mode off.
 

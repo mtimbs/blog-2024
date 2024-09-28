@@ -2,12 +2,14 @@
     title: "Microservices have nothing to do with deployment topology"
     description: "Too many people use the terms Microservice to refer to an independently deployed piece of code. This is not a good definition of a Microservice. Microservice architecture has nothing to do with deployment topology"
     pubDate: "2023-12-30"
+    status: "published"
 ---
 
 There is a common interpretation of the word service, which understands the phrase "creating a new service" to mean creating a new deployment artefact.
 
 This interpretation is ~~wrong~~ not very useful.
 
+I would like for us to get out of the habit of talking about the deployment topology of our code as "services". To explain why, I will progressively change an app's deployment topology and ask at what point it becomes a "microservice". Our base case is going to be a single monolithic application deployed on a single VM.
 I would like for us to get out of the habit of talking about the deployment topology of our code as "services". To explain why, I will progressively change an app's deployment topology and ask at what point it becomes a "microservice". Our base case is going to be a single monolithic application deployed on a single VM.
 
 ### Scaling out behind a load balancer

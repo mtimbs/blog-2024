@@ -2,6 +2,7 @@
     title: "Switching Between Multiple AWS Accounts"
     description: "How to set up switch role permissions in AWS to easily move between accounts"
     pubDate: "2020-03-04"
+    status: "published"
 ---
 Whether you use AWS across your organisation or for personal projects, it is useful to set up multiple accounts on
 AWS to separate your staging/test and production environments.

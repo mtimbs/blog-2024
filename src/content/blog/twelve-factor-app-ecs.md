@@ -2,6 +2,7 @@
     title: "Twelve-Factor App with Amazon ECS and the CDK"
     description: "Amazon ECS encourages us to adopt practices that conform with the twelve-factor app methodology"
     pubDate: "2021-08-21"
+    status: "published"
 ---
 Every developer should be familiar with the concepts outlined in [The Twelve-Factor App](https://12factor.net/). The twelve-factor app is a
 methodology for building modern SaaS apps.

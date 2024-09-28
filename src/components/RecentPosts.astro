@@ -1,9 +1,6 @@
 ---
 import FormattedDate from '../components/FormattedDate.astro';
-import { getCollection } from 'astro:content';
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-).slice(0,5);
+import {posts} from "../queries/posts"
 ---
 <section>
     <details>
@@ -12,18 +9,15 @@ const posts = (await getCollection('blog')).sort(
         </summary>
 			{
 				posts.map((post) => (
-
-						<a href={`/blog/${post.slug}/`}>
-							<h2 >{post.data.title}</h2>
-							<p class="date">
-								<FormattedDate date={post.data.pubDate} />
-							</p>
-						</a>
-
+					<a href={`/blog/${post.slug}/`}>
+						<h2 >{post.data.title}</h2>
+						<p class="date">
+							<FormattedDate date={post.data.pubDate} />
+						</p>
+					</a>
 				))
 			}
     </details>
-
 </section>
 <style>
     a {
