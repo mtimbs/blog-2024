@@ -1,9 +1,15 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
+import Courses from "../components/Courses.astro";
 import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import Projects from '../components/Projects.astro';
+import RecentPosts from '../components/RecentPosts.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import LandingImage from '../components/LandingImage.astro';
+
+
+
 ---
 
 <!doctype html>
@@ -15,6 +21,9 @@ import LandingImage from '../components/LandingImage.astro';
 		<Header />
 		<main>
 			<LandingImage />
+			<Courses />
+			<Projects />
+			<RecentPosts />
 		</main>
 		<Footer />
 	</body>

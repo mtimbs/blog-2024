@@ -37,6 +37,11 @@ function adjustMediaPadding() {
         width = media.videoWidth;
         height = media.videoHeight;
         break;
+      case "PRE":
+        width = media.scrollWidth;
+        height = media.scrollHeight;
+
+        break;
     }
     if (width > 0 && height > 0) {
       setHeightFromRatio(media, width / height);
@@ -45,8 +50,8 @@ function adjustMediaPadding() {
     }
   }
 
-  const medias = document.querySelectorAll("img, video", "pre", "code");
-  for (media of medias) {
+  const medias = document.querySelectorAll("img, video, pre");
+  for (const media of medias) {
     switch (media.tagName) {
       case "IMG":
         if (media.complete) {
@@ -73,8 +78,15 @@ function adjustMediaPadding() {
             break;
         }
         break;
+      case "PRE":
+        onMediaLoaded(media);
+        media.addEventListener("error", function () {
+          setFallbackHeight(media);
+        });
+        break;
     }
   }
+  loaded = true;
 }
 
 adjustMediaPadding();
@@ -92,7 +104,7 @@ function checkOffsets() {
   ]);
   const cell = gridCellDimensions();
   const elements = document.querySelectorAll(
-    "body :not(.debug-grid, .debug-toggle)"
+    "body :not(.debug-grid, .debug-toggle)",
   );
   for (const element of elements) {
     if (ignoredTagNames.has(element.tagName)) {
@@ -113,7 +125,7 @@ function checkOffsets() {
         "with remainder",
         top % cell.height,
         "when expecting divisible by",
-        cell.height / 2
+        cell.height / 2,
       );
     } else {
       element.classList.remove("off-grid");

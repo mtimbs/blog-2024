@@ -99,7 +99,7 @@ hr {
   position: relative;
   display: block;
   height: var(--line-height);
-  margin: calc(var(--line-height) * 0.5) 0;
+  margin: calc(var(--line-height) * 1.5) 0;
   border: none;
   color: var(--text-color);
 }
@@ -129,7 +129,7 @@ a:hover {
 
 p {
   margin-bottom: var(--line-height);
-  line-height: calc(1.5 * var(--line-height));
+  line-height: calc(1 * var(--line-height));
 }
 
 strong {
@@ -513,8 +513,8 @@ code {
   font-style: italic;
 }
 pre {
-  padding: calc(var(--line-height)) 1ch;
-  line-height: calc(1.75 * var(--line-height));
+  padding: calc(var(--line-height)) 3ch;
+  line-height: calc(1.5 * var(--line-height));
 }
 pre > code {
   all: unset;
