@@ -69,8 +69,8 @@ body {
   position: relative;
   width: 100%;
   margin: 0;
-  padding: var(--line-height) 5ch;
-  max-width: calc(min(90ch, round(down, 100%, 1ch)));
+  padding: var(--line-height) 3ch;
+  max-width: calc(min(86ch, round(down, 100%, 1ch)));
   line-height: var(--line-height);
   overflow-x: hidden;
 }
@@ -140,7 +140,7 @@ a:hover {
 
 p {
   margin-bottom: var(--line-height);
-  line-height: calc(1.25 * var(--line-height));
+  line-height: var(--line-height);
 }
 
 strong {
@@ -523,7 +523,7 @@ code {
   font-style: italic;
 }
 pre {
-  padding: 1ch 1ch 1em 1ch;
+  padding: 0 2ch;
   line-height: calc(1.5 * var(--line-height));
 }
 pre > code {
@@ -539,4 +539,9 @@ pre {
 
 pre::-webkit-scrollbar {
   display: none; /* for Chrome, Safari, and Opera */
+}
+
+blockquote {
+  border-left: 5px solid var(--text-color-alt);
+  padding-left: 2ch;
 }
