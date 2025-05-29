@@ -30,7 +30,7 @@ From a technical and engineering point of view, the last 20% of the project is u
 
 From a product and management perspective, we can always convince ourselves that the solution to our problems lies in the future down an untrodden path. Revenue growth not high enough, sales conversions too low, churn too high? It is so easy to attribute all these issues a lack of some feature or another. It's really hard to double down and keep to a path when there's no immediate gratification. I think nearly every company has launched a new feature or product area with high hopes and expectations only to see it underwhelm on release. What's the harder pill to swallow? Did you build the wrong thing, or did you build the right thing but do it wrong? Do you keep investing in it and iterating and hope it lands, or do you move to the next thing?
 
-Somebody once warned that easy road leads to destruction. If we leave little papercuts all over our product, they eventually add up to a lot of pain for our customers. If we have one feature with a papercut or two we can still have a good product. If we have 30 features with papercuts, our entire product suddenly feels quite bad. Edge cases start to add up when you have a lot of edges. Something that works 99% of the time, starts to fail an uncomfortably high amount when you do it 10 million times.
+Somebody once warned that the easy road leads to destruction. If we leave little papercuts all over our product, they eventually add up to a lot of pain for our customers. If we have one feature with a papercut or two we can still have a good product. If we have 30 features with papercuts, our entire product suddenly feels quite bad. Edge cases start to add up when you have a lot of edges. Something that works 99% of the time, starts to fail an uncomfortably high amount when you do it 10 million times.
 
 
 ## Finding Your Bias
@@ -41,10 +41,11 @@ My bias in this area is quite strong. At some level I would choose to direct lab
 
 I'm also very aware that it's also very easy to iterate forever and never finish anything. You can redo the menu 100 times at your restaurant but it won't bring you customers if you haven't got a car park or street access.
 
-All this said and done, perhaps it's a good thing to work with people with an opposite bias. Two forces pushing in opposite directions with the product as the keystone at the center.
 
 ## Final thoughts
 
-I don't know that there is a clear answer here - at least I don't have one. As with everything, the answer is highly contextual and dynamic. I do somewhat believe that as an industry we have over-indexed on doing more.
+I don't know that there is a clear answer here - at least I don't have one. If you came here looking for answers then I am sorry. I have nothing to offer. As with everything, the answer is highly contextual and dynamic. I do somewhat believe that as an industry we have over-indexed on doing more, or perhaps undervalued doing better. Maybe it is actually possible to do the same amount, but just do it better. I think that on a long enough time horizon we can actually do more later by doing better earlier.
 
-If you came here looking for answers then I am sorry. I have nothing to offer. Perhaps I would encourage you to do less and do it better but that's advice that's based on a worldview and personal preference, not economics.
+Perhaps at best I could posit that it's a good thing to work with people with an opposite bias. Two forces pushing in opposite directions with the product as the keystone at the center.
+
+If you have strong opinions about this topic, or know of good resources to help resolve these tenisions, please share them with me.
