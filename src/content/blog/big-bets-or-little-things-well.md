@@ -1,6 +1,6 @@
 ---
-  title: "Product Focus: Big Bets or Small Things Well?"
-  description: "When building a product company is it better to take big bets and swing for the fences or focus on doing the little things well?"
+  title: "Product Focus: Do more or do better?"
+  description: "When building a product company is it better to keep building more features and broadening the product offering, or focus on doing fewer things but being the absolute best at those things."
   pubDate: "2025-05-29"
   status: "published"
 ---
@@ -13,22 +13,25 @@ A universal truth at every SaaS company I've worked at is that there is an insat
 
 The demand for product expansion is so high, that it is an increasingly common practice for companies to try to shield their developers from sales teams, bug reports, feature requests, and other forms of customer input. The rationale for such a move is often to protect the focus of the engineering teams. "We don't want to be a reactive organization. We need to chart our own course and maintain focus."
 
-Bold product vision and big bets are important. Executing on these projects is incredibly difficult to do when your team is constantly distracted by a constant stream of requests from individuals - either internal or external stakeholders. People will always want you to solve _their_ issues. Our job is to figure out how to generically solve an issue for as many people as possible. We optimise for the crowd, not the individual. However, how do we actually know how universal a problem is? One vocal customer might be speaking for 100 silent ones.
+Bold product vision and big bets are important. Executing on these projects is incredibly difficult to do when your team is constantly distracted by a constant stream of requests from individuals - either internal or external stakeholders. People will always want you to solve _their_ issues. Our job is to figure out how to generically solve an issue for as many people as possible. We optimise for the product as a whole, not a certain individuals bespoke needs. However, how do we actually know how universal a problem is? One vocal customer might be speaking for 100 silent customers, or 100 future customers.
 
 It really hurts to lose a big customer because they need you to do five things and you can only do three. I think everyone has experienced this. However, I have also experienced the scenarios where you win a deal because you do one or two things so well that customers will find a way to live without the other three (even when they initially claimed they were non-negotiable requirements).
 
-Early stage startups probably need to go broad early. As they find product market fit, they should probably exploit the areas that they are best at. What about more mature companies? Even startups as they mature have many external pressures to expand and do more. It's much easier to ask investors for money to do X,Y,Z to add revenue streams. It's much hard to ask for money to fund improvements for things you already do.
+Early stage startups probably need to go broad early. Doing one thing really well is only as valuable as the thing you decide to do! As they find product market fit, they should probably exploit the areas that they are best at. What about more mature companies? Even startups as they mature have many external pressures to expand and do more. It's much easier to ask investors for money to do X,Y,Z to add additional revenue streams. It's much harder (but not impossible) to ask for money to fund improvements for things you already do.
 
-So how do we decide? When faced with the choice between going broad or going deep, between building new features or perfecting existing ones, what guides our decision?
+So how do we decide? When faced with the choice between going broad or going deep, between building new features or perfecting existing ones, what guides our decisions?
 
 
 ## Taking the easy road?
 
-The thing that concerns me about the never-ending focus on big projects is it feels very close to procrastination. In many cases it is much easier and exciting to start something new instead of finishing what you're working on.
+The thing that concerns me about the never-ending focus on new projects is it feels very close to procrastination. In many cases it is much easier and exciting to start something new instead of finishing what you're working on.
 
 From a technical and engineering point of view, the last 20% of the project is usually 80% of the work. The initial proof of concepts, happy paths, key workflows are easy and smooth. It's that last mile of polish that is the hardest part. It is the part that requires the most attention to detail, the most testing, and the most iteration. It is the part that requires the most creativity and innovation. It is the part that requires the most time and effort. You wouldn't have strewn //TODO comments through the code if the work was easy or exciting to do. You would have just done it in the moment.
 
 From a product and management perspective, we can always convince ourselves that the solution to our problems lies in the future down an untrodden path. Revenue growth not high enough, sales conversions too low, churn too high? It is so easy to attribute all these issues a lack of some feature or another. It's really hard to double down and keep to a path when there's no immediate gratification. I think nearly every company has launched a new feature or product area with high hopes and expectations only to see it underwhelm on release. What's the harder pill to swallow? Did you build the wrong thing, or did you build the right thing but do it wrong? Do you keep investing in it and iterating and hope it lands, or do you move to the next thing?
+
+Somebody once warned that easy road leads to destruction. If we leave little papercuts all over our product, they eventually add up to a lot of pain for our customers. If we have one feature with a papercut or two we can still have a good product. If we have 30 features with papercuts, our entire product suddenly feels quite bad. Edge cases start to add up when you have a lot of edges. Something that works 99% of the time, starts to fail an uncomfortably high amount when you do it 10 million times.
+
 
 ## Finding Your Bias
 
@@ -36,10 +39,12 @@ Different people and personalities tend to be biased in different directions as 
 
 My bias in this area is quite strong. At some level I would choose to direct labor and resources at a grand cathedral over a bunch of housing, regardless of the economic tradeoffs. I would take marginal reductions in the mundane and unimportant in exchange for monuments that inspire and show what's possible. Left to my own devices - I'll always pick a smaller number of unforgettable user experiences and product features. I'll always choose to build higher quality software - even if it means building less (a tradeoff I think is vastly overstated FWIW).
 
-All this said and done, perhaps it's a good thing to work with people with an opposite bias. Two forces pushing in opposite directions with the product as the keystone at the center. Like many things in life, this can be though of as the classic exploration/exploitation problem.
+I'm also very aware that it's also very easy to iterate forever and never finish anything. You can redo the menu 100 times at your restaurant but it won't bring you customers if you haven't got a car park or street access.
+
+All this said and done, perhaps it's a good thing to work with people with an opposite bias. Two forces pushing in opposite directions with the product as the keystone at the center.
 
 ## Final thoughts
 
-I don't know that there is a clear answer here - at least I don't have one. As with everything, the answer is highly contextual and dynamic.
+I don't know that there is a clear answer here - at least I don't have one. As with everything, the answer is highly contextual and dynamic. I do somewhat believe that as an industry we have over-indexed on doing more.
 
 If you came here looking for answers then I am sorry. I have nothing to offer. Perhaps I would encourage you to do less and do it better but that's advice that's based on a worldview and personal preference, not economics.
