@@ -129,9 +129,7 @@ These tasks are easy in the absolute sense if you know the solution. They involv
 
 Implementing RAFT from the paper is work; inventing RAFT was the breakthrough. The same pattern shows up in compilers and databases: once the theory exists, the code is the least interesting part.
 
-If your job is implementing RAFT all day, a reliable model could be a huge boost. But the claim from foundation-model labs is broader: use RL and other training tricks to produce a *general* coding model. Those reward signals can reliably teach transcription—turn a spec into code that passes checks. They do not obviously teach the kind of problem solving that could have discovered RAFT in the first place, or the judgment to know when RAFT is appropriate, because the reward for “this is the right model of the problem” is not generic or readily available.
 
-Counter-intuitively, the difficult systems are often the ones that look boring: B2B CRUD, workflows, integrations. They are hard because there is no single algorithm to implement. The engineer must discover the problem, define the model, and decide the tradeoffs. The actual implementation in the syntax of choice is only the last mile.
 
 ## Where RL Actually Works (and Why Software Violates It)
 
