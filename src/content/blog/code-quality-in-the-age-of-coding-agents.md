@@ -237,6 +237,11 @@ I will often have multiple concurrent agents finding answers to Qs
 
 Roughly 70% or more of my usage is to automate and aid the investigation of existing code in order to get better clarification. This helps me create a mental model of the existing system and allows me to start planning how to work with it.
 
+The great thing about using AI like this is
+- unlimited parallelism. No worktrees or conflicts because you arent generating code
+- fire and forget. true async research, takes only a few seconds to ask a Q and i can come back to it hours or days later
+- as i am working in the code, if i get a hint of something feeling wrong i just fire off an agent to go explore that area to give me a report of how it all fits together and why
+
 In games like Age of Empires you used to be able to send out cheap units (goats, explorers etc) to explore the map for you while you focused on building. I use coding agents like this a lot.
 
 ![Coding ability](https://res.cloudinary.com/dwglesldc/image/upload/v1773196622/fogofwar_s1gyo0.avif)
