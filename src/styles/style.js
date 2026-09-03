@@ -94,18 +94,9 @@ window.addEventListener("load", adjustMediaPadding);
 window.addEventListener("resize", adjustMediaPadding);
 
 function checkOffsets() {
-  const ignoredTagNames = new Set([
-    "THEAD",
-    "TBODY",
-    "TFOOT",
-    "TR",
-    "TD",
-    "TH",
-  ]);
+  const ignoredTagNames = new Set(["THEAD", "TBODY", "TFOOT", "TR", "TD", "TH"]);
   const cell = gridCellDimensions();
-  const elements = document.querySelectorAll(
-    "body :not(.debug-grid, .debug-toggle)",
-  );
+  const elements = document.querySelectorAll("body :not(.debug-grid, .debug-toggle)");
   for (const element of elements) {
     if (ignoredTagNames.has(element.tagName)) {
       continue;

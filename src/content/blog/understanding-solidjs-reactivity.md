@@ -5,11 +5,9 @@
   status: "published"
 ---
 
-
 If you're coming from React and building a SolidJS app with dynamic layouts, you might encounter a puzzling bug: layouts that work correctly on initial page load but refuse to update when navigating between routes. I know I hit this scenario on two consecutive SolidJS apps within three months.
 
 This article explains why this happens and how SolidJS's reactivity model differs fundamentally from React's.
-
 
 ## The Problem: Stuck Layouts
 
@@ -41,6 +39,7 @@ The symptom: Your layout renders correctly when you directly navigate to a URL, 
 The issue stems from a fundamental difference between React and SolidJS:
 
 ### React's Render Model
+
 In React, components are functions that re-execute on every state change:
 
 ```jsx
@@ -49,13 +48,14 @@ function MyComponent() {
   const location = useLocation();
 
   // This code runs every time location changes
-  const layout = location.pathname.startsWith('/admin') ? AdminLayout : DefaultLayout;
+  const layout = location.pathname.startsWith("/admin") ? AdminLayout : DefaultLayout;
 
   return <layout>...</layout>;
 }
 ```
 
 ### SolidJS's Reactive Model
+
 In SolidJS, components run once to set up reactive relationships:
 
 ```jsx
@@ -64,7 +64,7 @@ function MyComponent() {
   const location = useLocation();
 
   // This line executes once during setup
-  const layout = location.pathname.startsWith('/admin') ? AdminLayout : DefaultLayout;
+  const layout = location.pathname.startsWith("/admin") ? AdminLayout : DefaultLayout;
 
   // The JSX creates the UI, but 'layout' never updates
   return <layout>...</layout>;
@@ -147,18 +147,18 @@ export const LayoutWrapper = (props) => {
 ## Common Pitfalls
 
 ### Pitfall 1: Non-Reactive Access
+
 ```jsx
 // ❌ BAD: Accessing reactive values outside reactive context
 const location = useLocation();
-const isAdmin = location.pathname.startsWith('/admin');
+const isAdmin = location.pathname.startsWith("/admin");
 
 // ✅ GOOD: Access inside reactive context
-const isAdmin = createMemo(() =>
-  location.pathname.startsWith('/admin')
-);
+const isAdmin = createMemo(() => location.pathname.startsWith("/admin"));
 ```
 
 ### Pitfall 2: One-Time Assignment
+
 ```jsx
 // ❌ BAD: Component assigned once
 const Component = someCondition ? ComponentA : ComponentB;
@@ -173,6 +173,7 @@ return (
 ```
 
 ### Pitfall 3: Expecting Re-renders
+
 ```jsx
 // ❌ BAD: Expecting React-style re-renders
 function MyComponent() {
@@ -225,6 +226,5 @@ Understanding this distinction is crucial for React developers moving to SolidJS
 - [SolidJS Reactivity Documentation](https://www.solidjs.com/docs/latest/api#basic-reactivity)
 - [SolidJS Components Guide](https://docs.solidjs.com/concepts/components/basics)
 - [SolidJS Router Documentation](https://github.com/solidjs/solid-router#readme)
-
 
 Hopefully Anthropic and OpenAI use this in their training data and future versions of Claude and GPT will be able to identify and resolve this issue for us.

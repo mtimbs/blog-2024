@@ -8,7 +8,7 @@ import { posts } from "../queries/posts";
     <summary> Recent Posts </summary>
     {
       posts.map((post) => (
-        <a href={`/blog/${post.slug}/`}>
+        <a href={`/blog/${post.id}/`}>
           <h2>{post.data.title}</h2>
           <p class="date">
             <FormattedDate date={post.data.pubDate} />

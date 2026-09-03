@@ -28,37 +28,34 @@ container definition lets us define the Docker image for our container, along wi
 secrets to inject into that container. An example container definition using the CDK looks something like this
 
 ```javascript
-const applicationContainer = applicationServiceDefinition.addContainer(
-  "app-container",
-  {
-    cpu: 256,
-    environment: {
-      APP_URL: "https://example.com",
-      LOG_CHANNEL: "stdout",
-      LOG_LEVEL: "debug",
-      DB_CONNECTION: "mysql",
-      DB_HOST: db.dbInstanceEndpointAddress,
-      DB_PORT: db.dbInstanceEndpointPort,
-      CACHE_DRIVER: "redis",
-      REDIS_HOST: redis.attrRedisEndpointAddress,
-      REDIS_PASSWORD: "null",
-      REDIS_PORT: "6379",
-    },
-    image: ContainerImage.fromDockerImageAsset(applicationImage),
-    logging: LogDriver.awsLogs({
-      logGroup: applicationLogGroup,
-      streamPrefix: new Date().toLocaleDateString("en-ZA"),
-    }),
-    memoryLimitMiB: 512,
-    secrets: {
-      DB_DATABASE: Secret.fromSecretsManager(db.secret, "dbname"),
-      DB_USERNAME: Secret.fromSecretsManager(db.secret, "username"),
-      DB_PASSWORD: Secret.fromSecretsManager(db.secret, "password"),
-      STRIPE_KEY: Secret.fromSecretsManager(stripe, "STRIPE_KEY"),
-      STRIPE_SECRET: Secret.fromSecretsManager(stripe, "STRIPE_SECRET"),
-    },
+const applicationContainer = applicationServiceDefinition.addContainer("app-container", {
+  cpu: 256,
+  environment: {
+    APP_URL: "https://example.com",
+    LOG_CHANNEL: "stdout",
+    LOG_LEVEL: "debug",
+    DB_CONNECTION: "mysql",
+    DB_HOST: db.dbInstanceEndpointAddress,
+    DB_PORT: db.dbInstanceEndpointPort,
+    CACHE_DRIVER: "redis",
+    REDIS_HOST: redis.attrRedisEndpointAddress,
+    REDIS_PASSWORD: "null",
+    REDIS_PORT: "6379",
   },
-);
+  image: ContainerImage.fromDockerImageAsset(applicationImage),
+  logging: LogDriver.awsLogs({
+    logGroup: applicationLogGroup,
+    streamPrefix: new Date().toLocaleDateString("en-ZA"),
+  }),
+  memoryLimitMiB: 512,
+  secrets: {
+    DB_DATABASE: Secret.fromSecretsManager(db.secret, "dbname"),
+    DB_USERNAME: Secret.fromSecretsManager(db.secret, "username"),
+    DB_PASSWORD: Secret.fromSecretsManager(db.secret, "password"),
+    STRIPE_KEY: Secret.fromSecretsManager(stripe, "STRIPE_KEY"),
+    STRIPE_SECRET: Secret.fromSecretsManager(stripe, "STRIPE_SECRET"),
+  },
+});
 ```
 
 In this example, we can see that some of our environment variables are set directly from other resources managed via
@@ -170,19 +167,15 @@ the event that a new release is broken, ECS can even automatically rollback to a
 setting the rollback attribute to true on our circuit breaker.
 
 ```javascript
-const applicationService = new FargateService(
-  this,
-  "application-fargate-service",
-  {
-    circuitBreaker: {
-      rollback: true,
-    },
-    deploymentController: {
-      type: DeploymentControllerType.ECS,
-    },
-    taskDefinition: applicationServiceDefinition,
+const applicationService = new FargateService(this, "application-fargate-service", {
+  circuitBreaker: {
+    rollback: true,
   },
-);
+  deploymentController: {
+    type: DeploymentControllerType.ECS,
+  },
+  taskDefinition: applicationServiceDefinition,
+});
 ```
 
 ### [VI. Process](https://12factor.net/processes)
@@ -370,20 +363,17 @@ Our containers are constantly being spun up and torn down. We also can't SSH int
 previous example, I showed an example Container Definition for an ECS Fargate Service. It defined a log driver like so:
 
 ```javascript
-const applicationContainer = applicationServiceDefinition.addContainer(
-  "app-container",
-  {
-    // other config
-    environment: {
-      // other env
-      LOG_LEVEL: "stdout",
-    },
-    logging: LogDriver.awsLogs({
-      logGroup: applicationLogGroup,
-      streamPrefix: new Date().toLocaleDateString("en-ZA"),
-    }),
+const applicationContainer = applicationServiceDefinition.addContainer("app-container", {
+  // other config
+  environment: {
+    // other env
+    LOG_LEVEL: "stdout",
   },
-);
+  logging: LogDriver.awsLogs({
+    logGroup: applicationLogGroup,
+    streamPrefix: new Date().toLocaleDateString("en-ZA"),
+  }),
+});
 ```
 
 Each container logs to stdout and then ECS uses a built-in log driver to stream those logs to

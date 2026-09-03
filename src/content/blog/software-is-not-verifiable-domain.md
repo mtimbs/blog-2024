@@ -11,7 +11,7 @@ status: "published"
 
 Software is often presented as the easiest domain for AI to automate. Programs are discrete. They compile or they don’t. Tests pass or they fail. Compared to robotics or medicine, software looks clean: formal, machine-checkable, and flooded with feedback signals.
 
-That framing confuses *checkability* with *verifiability*.
+That framing confuses _checkability_ with _verifiability_.
 
 We can check software extremely well: compilers, types, linters, tests, proofs, model checkers. But “verify” in the sense people imply—prove we built the right system for the real world, and that it will remain right as the world changes—is a different problem.
 
@@ -27,7 +27,7 @@ Formal verification is real and powerful in constrained domains—compilers, ker
 
 > The implementation satisfies the specification.
 
-It does not prove that the specification matches the thing you *meant* in the world.
+It does not prove that the specification matches the thing you _meant_ in the world.
 
 Even in unusually formal domains like compilers, the hard work is not transcribing semantics into code. The hard work is choosing semantics: what to support, what to forbid, what to leave undefined, how errors behave, what performance model you are willing to commit to, what extension points you’ll allow. Once those decisions exist, a “correct implementation” is comparatively straightforward.
 
@@ -44,9 +44,9 @@ Steelman the field. We have an impressive toolkit:
 
 These are not toys. They do valuable work: they reduce the lossiness of a theory by making assumptions explicit, and they leave guideposts for future engineers (human or machine). They turn “we think it works” into “it fails if this invariant breaks.”
 
-Their biggest contribution is often less philosophical. They reduce the mental burden of the *implementation*—the bookkeeping required to keep a large system coherent—and that buys you bandwidth to think about the theory itself.
+Their biggest contribution is often less philosophical. They reduce the mental burden of the _implementation_—the bookkeeping required to keep a large system coherent—and that buys you bandwidth to think about the theory itself.
 
-But they are still *representations* of your theory. They are not the underlying theory itself.
+But they are still _representations_ of your theory. They are not the underlying theory itself.
 
 Every technique forces the same prior step: decide what properties matter. Decide what invariants define “correct.” Decide what tradeoffs you are willing to accept. That is not verification; that is the essence of engineering.
 
@@ -68,7 +68,7 @@ RL can optimize behavior. It cannot decide what behavior is worth optimizing.
 
 ## The Theory Is Not the Code
 
-In his 1985 essay *Programming as Theory Building*, Peter Naur argued that the primary output of programming is not the code. It is the **theory** of the problem domain built in the minds of the programmers.
+In his 1985 essay _Programming as Theory Building_, Peter Naur argued that the primary output of programming is not the code. It is the **theory** of the problem domain built in the minds of the programmers.
 
 Code is a serialized, lossy projection of that theory.
 
@@ -94,11 +94,11 @@ That is why “verification” as a scoreboard is dangerous: it rewards curve fi
 
 ## The Missing Feedback Loop
 
-In *The Timeless Way of Building*, Christopher Alexander describes good design as a tight feedback loop: build, observe friction, adjust. Form adapts to context. Great software is grown the same way. The specification and the implementation co-evolve.
+In _The Timeless Way of Building_, Christopher Alexander describes good design as a tight feedback loop: build, observe friction, adjust. Form adapts to context. Great software is grown the same way. The specification and the implementation co-evolve.
 
 You start building X, discover it makes Y impossible, and you change what X should be. The theory updates.
 
-This is where the “prompt → code → verify” story collapses. It assumes the spec is a thing you have upfront, and the rest is search. In real systems the spec is what you *learn* while building.
+This is where the “prompt → code → verify” story collapses. It assumes the spec is a thing you have upfront, and the rest is search. In real systems the spec is what you _learn_ while building.
 
 You can train an agent to ask clarifying questions. The harder part is knowing which questions matter, which constraints are real, and when a “feature” is actually design debt. That requires theory, not just iteration.
 
@@ -128,8 +128,6 @@ There is a pervasive myth that the hard part of software is algorithmic cleverne
 These tasks are easy in the absolute sense if you know the solution. They involve almost no engineering. If an algorithm is already specified—even in English or equations—the hard part is done. The remaining work is transcription: translate the procedure into syntax.
 
 Implementing RAFT from the paper is work; inventing RAFT was the breakthrough. The same pattern shows up in compilers and databases: once the theory exists, the code is the least interesting part.
-
-
 
 ## Where RL Actually Works (and Why Software Violates It)
 

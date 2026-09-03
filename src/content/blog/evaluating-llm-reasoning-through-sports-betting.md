@@ -16,20 +16,24 @@ But real-world intelligence isn't about retrieving memorised facts or solving we
 While sports betting might initially seem unconventional it provides several unique properties that make it ideal for testing reasoning capabilities:
 
 ### 1. No Immediate Ground Truth
+
 Unlike academic benchmarks, sports betting has no, _a priori_, "correct" answer - outcomes are probabilistic. This mirrors real-world decision-making where we must act on incomplete information. Models can't pattern-match to training data or retrieve memorised answers.
 
 ### 2. Transparent Information Gathering
+
 When given access to web search, models reveal their information priorities. Do they search for team statistics? Recent performance? Weather conditions? Injury reports? Head-to-head records? The queries themselves become data points about reasoning strategies.
 
 ### 3. Transparent Reasoning
+
 The requirement to provide detailed reasoning exposes the model's analytical process. This transparency is crucial - we see not just what decision was made, but the logical chain that led there.
 
 ### 4. Strategic Risk Management
+
 Models manage a virtual bankroll, forcing implicit consideration of risk and resource allocation. This tests their strategic reasoning without explicit prompts.
 
 ### 5. Real-Time Constraints
-Using live odds and real events grounds the benchmark in reality. Models can't rely on outdated training data when analyzing tonight's boxing match or tomorrow's AFL game.
 
+Using live odds and real events grounds the benchmark in reality. Models can't rely on outdated training data when analyzing tonight's boxing match or tomorrow's AFL game.
 
 ## Implementing the Benchmark
 
@@ -52,7 +56,6 @@ Setting up the benchmark proved to be incredibly simple and it took only a few h
 6. **Bet Placement**: The model’s recommended bet and explanation are posted publicly on Betswaps.
 
 7. **Tracking & Results**: Betswaps automatically tracks the outcomes of each bet and updates the model's bankroll accordingly.
-
 
 ### The prompt
 
@@ -129,25 +132,23 @@ Note: While all models start with a default bankroll of $1,000, when a model goe
 
 ### Initial Models in benchmark
 
-| Model | BetSwaps Profile |
-|-------|------------------|
-| claude-sonnet-4-20250514 | [View Profile](https://www.betswaps.com/user/c00e3c61-61af-451b-9609-6f1ea687fdb6/) |
-| xai/grok-4-0709 | [View Profile](https://www.betswaps.com/user/ebf12440-732e-42e4-ada9-5c42b95b5c5b/) |
-| gpt-4o | [View Profile](https://www.betswaps.com/user/b8ef2e4e-6d7f-4e42-ad55-50e0ad9e9224/) |
-| deepseek/deepseek-reasoner | [View Profile](https://www.betswaps.com/user/a750afd8-9c5d-4ad9-bdad-2a926d88c391/) |
-| gemini/gemini-2.5-flash | [View Profile](https://www.betswaps.com/user/3544226e-4209-4cf3-9b24-145f8a869e27/) |
+| Model                         | BetSwaps Profile                                                                    |
+| ----------------------------- | ----------------------------------------------------------------------------------- |
+| claude-sonnet-4-20250514      | [View Profile](https://www.betswaps.com/user/c00e3c61-61af-451b-9609-6f1ea687fdb6/) |
+| xai/grok-4-0709               | [View Profile](https://www.betswaps.com/user/ebf12440-732e-42e4-ada9-5c42b95b5c5b/) |
+| gpt-4o                        | [View Profile](https://www.betswaps.com/user/b8ef2e4e-6d7f-4e42-ad55-50e0ad9e9224/) |
+| deepseek/deepseek-reasoner    | [View Profile](https://www.betswaps.com/user/a750afd8-9c5d-4ad9-bdad-2a926d88c391/) |
+| gemini/gemini-2.5-flash       | [View Profile](https://www.betswaps.com/user/3544226e-4209-4cf3-9b24-145f8a869e27/) |
 | mistral/magistral-medium-2506 | [View Profile](https://www.betswaps.com/user/ad18a1df-3ad8-40a0-b66e-21d49f8f7dff/) |
-| perplexity/sonar-reasoning | [View Profile](https://www.betswaps.com/user/ec4bf80d-a700-4795-838f-593a943b7d7c/) |
-
+| perplexity/sonar-reasoning    | [View Profile](https://www.betswaps.com/user/ec4bf80d-a700-4795-838f-593a943b7d7c/) |
 
 ![Mistral Performance](https://res.cloudinary.com/dwglesldc/image/upload/v1753017045/Screenshot_2025-07-20_at_10.38.16_pm_ommmz8.png)
 
 You do not need an account to view all bets placed by all models in real time at [https://www.betswaps.com/](https://www.betswaps.com/).
 
-
 ## Benchmark code
 
-The code for this benchmark can be found on Github [here]() ^(COMING SOON). You are welcome to clone the script and make your own edits and submit models to Betswaps.
+The code for this benchmark can be found on Github [here](<>) ^(COMING SOON). You are welcome to clone the script and make your own edits and submit models to Betswaps.
 
 ## Limitations and Future Directions
 
@@ -160,7 +161,6 @@ To evolve beyond simple reactive searches toward genuine reasoning, the benchmar
 - **Strategy Evolution**: Let models develop and test their own analytical frameworks
 
 These enhancements would move beyond simple search synthesis toward genuine reasoning systems.
-
 
 ## Conclusion
 
@@ -176,28 +176,27 @@ This benchmark doesn’t claim to provide definitive answers, but rather offers 
 
 While this benchmark is still in its early stages, it has already revealed some interesting patterns.
 
-
 ## Emergent Mathematical Reasoning
 
 Mistral emerged as the top early performer with explicit mathematical reasoning.
 
 > "With Marlins at 2.16 odds (46.3% implied probability) but estimated 52% true probability:
-EV = (0.52 × 1.16) - (0.48 × 1) = 0.1232 or 12.32% edge
-Kelly Criterion suggests: 4% of bankroll = $33"
+> EV = (0.52 × 1.16) - (0.48 × 1) = 0.1232 or 12.32% edge
+> Kelly Criterion suggests: 4% of bankroll = $33"
 
-This isn't just sophisticated - it's *correct* mathematical thinking applied to uncertainty. Mistral treats betting as a mathematical optimisation problem, not a prediction task. This is impressive as the user prompt given to models very *deliberately* did not try to guide models to adopt this behaviour.
-
+This isn't just sophisticated - it's _correct_ mathematical thinking applied to uncertainty. Mistral treats betting as a mathematical optimisation problem, not a prediction task. This is impressive as the user prompt given to models very _deliberately_ did not try to guide models to adopt this behaviour.
 
 ## Domain-Specific Analytical Biases
 
 Here's where it gets fascinating. The same Mistral that applies probability theory to baseball completely abandons mathematical thinking when analyzing boxing:
 
 **Baseball Mistral**:
+
 > "Using normal distribution with z-score = -0.064, we get P(Z > -0.064) ≈ 0.5256, suggesting 52.56% true probability vs 50.25% implied, creating positive EV"
 
 **Boxing Mistral**:
-> "A bet on Robert Redmond Jr at 8.0 odds offers a significant payout with a relatively small stake"
 
+> "A bet on Robert Redmond Jr at 8.0 odds offers a significant payout with a relatively small stake"
 
 I propose two potential explanations:
 
@@ -210,18 +209,21 @@ I propose two potential explanations:
 When we look at the models in aggregate across sports, we see the same phenomenon as described above. All models provide more sophisticated reasoning for Baseball games than they do for other sports.
 
 **Baseball (High Sophistication Across All Models):**
+
 - Deep pitching matchup analysis (ERA, WHIP, win-loss records)
 - Park factors and home/road splits
 - Advanced sabermetrics references
 - Expected value calculations
 
 **AFL/NRL (Low Sophistication Across All Models):**
+
 - Basic ladder positions and recent form
 - Generic "momentum" references
 - Limited statistical depth
 - Heavy reliance on expert opinions
 
 **Boxing (Narrative-Driven):**
+
 - Focus on storylines and "home advantage"
 - Simple odds comparisons
 - No systematic value calculations
@@ -229,22 +231,21 @@ When we look at the models in aggregate across sports, we see the same phenomeno
 
 This pattern holds across all models, suggesting they're not general reasoners but sophisticated mirrors of human analytical cultures in different domains. Baseball benefits from decades of sabermetrics revolution; boxing remains stuck in narrative tradition.
 
-
 ## Information Gathering: Targeted vs. Exhaustive Approaches
 
 Claude performs numerous general searches, hoping insights will organically emerge. In contrast, Mistral strategically conducts fewer, highly-targeted queries directly related to actionable insights, illustrating the advantage of hypothesis-driven search strategies over exploratory browsing.
 
 **Claude's searches:**
+
 - "Miami Marlins recent performance"
 - "Kansas City Royals news"
 - "MLB standings July 2025"
 
 **Mistral's searches:**
+
 - "Miami Marlins vs Kansas City Royals head to head 2025"
 - "Michael Wacha ERA vs left handed batters 2025"
 - "Kauffman Stadium park factors runs 2025"
-
-
 
 ## Risk Profiles: Aggression v Conservatism
 
@@ -269,7 +270,6 @@ The models exhibit dramatically different risk personalities:
 - **Perplexity**: Ultra-conservative, frequently declining to bet
 
 I was surprised to see that models have distinct risk appetites and propensity to bet.
-
 
 ## Cost vs. Performance Trade-Offs
 

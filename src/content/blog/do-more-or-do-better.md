@@ -21,7 +21,6 @@ Early stage startups probably need to go broad early. Doing one thing really wel
 
 So how do we decide? When faced with the choice between going broad or going deep, between building new features or perfecting existing ones, what guides our decisions?
 
-
 ## Taking the easy road?
 
 The thing that concerns me about the never-ending focus on new projects is it feels very close to procrastination. In many cases it is much easier and exciting to start something new instead of finishing what you're working on.
@@ -32,7 +31,6 @@ From a product and management perspective, we can always convince ourselves that
 
 Somebody once warned that the easy road leads to destruction. If we leave little papercuts all over our product, they eventually add up to a lot of pain for our customers. If we have one feature with a papercut or two we can still have a good product. If we have 30 features with papercuts, our entire product suddenly feels quite bad. Edge cases start to add up when you have a lot of edges. Something that works 99% of the time, starts to fail an uncomfortably high amount when you do it 10 million times.
 
-
 ## Finding Your Bias
 
 Different people and personalities tend to be biased in different directions as their baseline. This can cause tension when doing product strategy and prioritisation. I know that I am personally much more biased towards doing less and doing it well. I love to build beautiful things. Build great products, great user experiences, and great software. I am more craftsman than tradesman at heart.
@@ -40,7 +38,6 @@ Different people and personalities tend to be biased in different directions as 
 My bias in this area is quite strong. At some level I would choose to direct labor and resources at a grand cathedral over a bunch of housing, regardless of the economic tradeoffs. I would take marginal reductions in the mundane and unimportant in exchange for monuments that inspire and show what's possible. Left to my own devices - I'll always pick a smaller number of unforgettable user experiences and product features. I'll always choose to build higher quality software - even if it means building less (a tradeoff I think is vastly overstated FWIW).
 
 I'm also very aware that it's also very easy to iterate forever and never finish anything. You can redo the menu 100 times at your restaurant but it won't bring you customers if you haven't got a car park or street access.
-
 
 ## Final thoughts
 
